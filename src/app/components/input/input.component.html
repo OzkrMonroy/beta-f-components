@@ -1,18 +1,16 @@
 <div class="relative mt-5 ml-5" [ngClass]="containerClasses" [formGroup]="form">
   <input
-    type="text"
-    id="fname"
-    name="fname"
-    autocomplete="off"
-    formControlName="name"
+    [type]="type"
+    [id]="id"
+    [name]="name"
+    [autocomplete]="autoComplete"
+    [formControlName]="name"
     [ngClass]="color"
     #inputRef
   />
-  <label
-    class="placeholder-text"
-    for="fname"
-    id="placeholder-fname"
-  >
-    <div class="text" [class.float]="mustFloat()" [ngClass]="color">First Name</div>
+  <label class="placeholder-text" [for]="name" id="placeholder-fname">
+    <div class="text flex gap-1 items-center" [class.float]="mustFloat()" [ngClass]="color">
+      <span>{{ lable }}</span><span class="pt-1" *ngIf="required">*</span>
+    </div>
   </label>
 </div>
