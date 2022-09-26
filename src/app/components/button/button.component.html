@@ -1,0 +1,9 @@
+<div [ngClass]="containerClasses">
+  <button
+    [type]="type"
+    [ngClass]="getClasses()"
+    class="text-center py-3 px-12 rounded-3xl transition-colors duration-300 w-full"
+  >
+    {{ label }}
+  </button>
+</div>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { InputColors } from 'src/app/types/input';
 
 @Component({
   selector: 'app-input',
@@ -11,7 +12,9 @@ export class InputComponent {
     name: ['', Validators.required],
   });
   
-  @Input() color: string = 'primary';
+  @Input() color: InputColors = 'primary';
+  @Input() containerClasses: string = ''
+
   constructor(private readonly formBuilder: FormBuilder) {}
 
   mustFloat() {

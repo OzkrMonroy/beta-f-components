@@ -1,0 +1,1 @@
+export type InputColors = 'primary' | 'error' | 'success'
