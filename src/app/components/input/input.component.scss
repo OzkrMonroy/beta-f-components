@@ -1,0 +1,48 @@
+input {
+  @apply h-10 w-full border-2 border-solid rounded-2xl;
+
+  &:focus {
+    @apply outline-none;
+  }
+  &:focus + .placeholder-text .text {
+    @apply text-violet-500;
+  }
+}
+
+input:focus + .placeholder-text .text,
+.placeholder-text .text.float {
+  @apply bg-white text-sm;
+  transform: translate(0, -100%);
+}
+.placeholder-text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 3px solid transparent;
+  background-color: transparent;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+.text {
+  font-size: 1rem;
+  padding: 0 0.5rem;
+  background-color: transparent;
+  transform: translate(0);
+  //   color: rgb(161 161 170);
+  transition: transform 0.15s ease-out, font-size 0.15s ease-out,
+    background-color 0.2s ease-out, color 0.15s ease-out;
+}
+input,
+.placeholder-text {
+  font-size: 1rem;
+  padding: 0 0.85rem;
+}
+
+@media (max-width: 40rem) {
+  input {
+    width: 70vw;
+  }
+}

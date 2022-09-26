@@ -1,0 +1,19 @@
+<div class="relative mt-5 ml-5" [formGroup]="form">
+  <input
+    type="text"
+    id="fname"
+    name="fname"
+    autocomplete="off"
+    formControlName="name"
+    [ngClass]="inputClasses"
+    #inputRef
+  />
+  <label
+    class="placeholder-text"
+    for="fname"
+    id="placeholder-fname"
+    [ngClass]="placeholderClasses"
+  >
+    <div class="text" [class.float]="mustFloat()">First Name</div>
+  </label>
+</div>
