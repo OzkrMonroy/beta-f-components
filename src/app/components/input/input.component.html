@@ -5,15 +5,14 @@
     name="fname"
     autocomplete="off"
     formControlName="name"
-    [ngClass]="inputClasses"
+    [ngClass]="color"
     #inputRef
   />
   <label
     class="placeholder-text"
     for="fname"
     id="placeholder-fname"
-    [ngClass]="placeholderClasses"
   >
-    <div class="text" [class.float]="mustFloat()">First Name</div>
+    <div class="text" [class.float]="mustFloat()" [ngClass]="color">First Name</div>
   </label>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,11 +7,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
-  placeholderClasses = 'text-cyan-400';
-  inputClasses: string = 'border-cyan-400 focus:border-violet-500';
   form: FormGroup = this.formBuilder.group({
     name: ['', Validators.required],
   });
+  
+  @Input() color: string = 'primary';
   constructor(private readonly formBuilder: FormBuilder) {}
 
   mustFloat() {
