@@ -1,11 +1,25 @@
 <div class="relative mt-5 ml-5" [ngClass]="containerClasses" [formGroup]="form">
   <input
+    *ngIf="rule !== 'amount'"
+    [ngClass]="color"
     [type]="type"
     [id]="id"
     [name]="name"
     [autocomplete]="autoComplete"
     [formControlName]="name"
+    [maxlength]="length"
+    #inputRef
+  />
+  <input
+    *ngIf="rule === 'amount'"
     [ngClass]="color"
+    [type]="type"
+    [id]="id"
+    [name]="name"
+    [autocomplete]="autoComplete"
+    [formControlName]="name"
+    [maxlength]="length"
+    appFormatNumber
     #inputRef
   />
   <label class="placeholder-text" [for]="name" id="placeholder-fname">
