@@ -1,7 +1,7 @@
 <div class="relative mt-5 ml-5 mb-8" [ngClass]="containerClasses" [formGroup]="form">
   <input
     *ngIf="rule !== 'amount' && rule !== 'dpi'"
-    [ngClass]="color"
+    [ngClass]="getInputColor()"
     [type]="type"
     [id]="id"
     [name]="name"
@@ -13,7 +13,7 @@
   />
   <input
     *ngIf="rule === 'amount'"
-    [ngClass]="color"
+    [ngClass]="getInputColor()"
     [type]="type"
     [id]="id"
     [name]="name"
@@ -26,7 +26,7 @@
   />
   <input
     *ngIf="rule === 'dpi'"
-    [ngClass]="color"
+    [ngClass]="getInputColor()"
     [type]="type"
     [id]="id"
     [name]="name"
@@ -37,8 +37,8 @@
     #inputRef
   />
   <label class="placeholder-text" [for]="name" id="placeholder-fname">
-    <div class="text flex gap-1 items-center" [class.float]="mustFloat()" [ngClass]="color">
-      <span>{{ lable }}</span><span class="pt-1" *ngIf="required">*</span>
+    <div class="text flex gap-1 items-center" [class.float]="mustFloat()" [ngClass]="getInputColor()">
+      <span>{{ label }}</span><span class="pt-1" *ngIf="required">*</span>
     </div>
   </label>
   <app-input-alerts [parentForm]="form" [name]="name" [rule]="rule"></app-input-alerts>

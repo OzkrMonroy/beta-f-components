@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import {
   InputAutoComplete,
   InputColors,
@@ -14,14 +14,10 @@ import { InputValidationsService } from '@/app/utils/inputValidations/input-vali
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
-  //TODO: delete this later
-  form: FormGroup = this.formBuilder.group({
-    ['default-name']: ['', Validators.required],
-  });
 
   @Input() color: InputColors = 'primary';
   @Input() containerClasses: string = '';
-  @Input() lable: string = 'Default label';
+  @Input() label: string = 'Default label';
 
   @Input() type: InputType = 'text';
   @Input() id: string = 'default-id';
@@ -30,11 +26,11 @@ export class InputComponent {
   @Input() required: boolean = false;
   @Input() length: string = '50';
   @Input() rule: InputRules = 'inherit';
+  @Input() form!: FormGroup
 
   @ViewChild('inputRef') inputElement!: ElementRef;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
     private readonly inputValidations: InputValidationsService
   ) {}
 
@@ -55,16 +51,13 @@ export class InputComponent {
         event
       );
     }
-    if(this.rule === 'dpi'){
-      const resp = this.inputValidations.dpiValidation(
-        valueWord,
-        this.length
-      );
-      if(!resp){
-        return false
+    if (this.rule === 'dpi') {
+      const resp = this.inputValidations.dpiValidation(valueWord, this.length);
+      if (!resp) {
+        return false;
       }
-      this.dpiFormat()
-      return event
+      this.dpiFormat();
+      return event;
     }
     if (this.rule === 'number') {
       return this.inputValidations.numberValidation(
@@ -88,7 +81,7 @@ export class InputComponent {
       trimmedCardNum = trimmedCardNum.substr(0, 15);
     }
 
-    const partitions = [4, 5, 4]
+    const partitions = [4, 5, 4];
 
     const numbers: any[] = [];
     let position = 0;
@@ -108,5 +101,15 @@ export class InputComponent {
 
   mustFloat() {
     return this.form.get(this.name)?.value !== '';
+  }
+
+  getInputColor() {
+    if (
+      this.form.get(this.name)?.errors &&
+      (this.form.get(this.name)?.touched || this.form.get(this.name)?.dirty)
+    ) {
+      return 'error';
+    }
+    return this.color;
   }
 }
