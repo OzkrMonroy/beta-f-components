@@ -1,6 +1,6 @@
 <div class="relative mt-5 ml-5 mb-8" [ngClass]="containerClasses" [formGroup]="form">
   <input
-    *ngIf="rule !== 'amount'"
+    *ngIf="rule !== 'amount' && rule !== 'dpi'"
     [ngClass]="color"
     [type]="type"
     [id]="id"
@@ -22,6 +22,18 @@
     [maxlength]="length"
     (keypress)="validationValue($event)"
     appFormatNumber
+    #inputRef
+  />
+  <input
+    *ngIf="rule === 'dpi'"
+    [ngClass]="color"
+    [type]="type"
+    [id]="id"
+    [name]="name"
+    [autocomplete]="autoComplete"
+    [formControlName]="name"
+    [maxlength]="length"
+    (keypress)="validationValue($event)"
     #inputRef
   />
   <label class="placeholder-text" [for]="name" id="placeholder-fname">

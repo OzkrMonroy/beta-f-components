@@ -45,7 +45,24 @@ export class InputValidationsService {
     }
   }
 
-  amountValidation(
+  dpiValidation(
+    valueToValidate: string,
+    length: string,
+  ): boolean {
+    const regex = /^\d+$/g;
+    const cleanValue = valueToValidate.replace(/ /g, '')
+    
+    if (cleanValue.length > parseInt(length)) {
+      return false;
+    }
+    if (!regex.test(cleanValue)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  lengthValidation(
     valueToValidate: string,
     length: string,
     event: KeyboardEvent

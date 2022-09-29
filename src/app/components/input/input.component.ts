@@ -49,11 +49,22 @@ export class InputComponent {
       return this.inputValidations.addressValidation(valueWord, event);
     }
     if (this.rule === 'amount') {
-      return this.inputValidations.amountValidation(
+      return this.inputValidations.lengthValidation(
         valueWord,
         this.length,
         event
       );
+    }
+    if(this.rule === 'dpi'){
+      const resp = this.inputValidations.dpiValidation(
+        valueWord,
+        this.length
+      );
+      if(!resp){
+        return false
+      }
+      this.dpiFormat()
+      return event
     }
     if (this.rule === 'number') {
       return this.inputValidations.numberValidation(
@@ -64,6 +75,35 @@ export class InputComponent {
     }
 
     return event;
+  }
+
+  dpiFormat() {
+    const input = this.inputElement.nativeElement;
+    const { selectionStart } = input;
+    const formInputValue = this.form.controls[this.name];
+
+    let trimmedCardNum = formInputValue.value.replace(/\s+/g, '');
+
+    if (trimmedCardNum.length > 15) {
+      trimmedCardNum = trimmedCardNum.substr(0, 15);
+    }
+
+    const partitions = [4, 5, 4]
+
+    const numbers: any[] = [];
+    let position = 0;
+    partitions.forEach((partition) => {
+      const part = trimmedCardNum.substr(position, partition);
+      if (part) numbers.push(part);
+      position += partition;
+    });
+
+    formInputValue.setValue(numbers.join(' '));
+
+    /* Handle caret position if user edits the number later */
+    if (selectionStart < formInputValue.value.length - 1) {
+      input.setSelectionRange(selectionStart, selectionStart, 'none');
+    }
   }
 
   mustFloat() {
