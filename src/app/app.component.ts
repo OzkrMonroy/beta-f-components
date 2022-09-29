@@ -10,8 +10,9 @@ export class AppComponent {
   title = 'financial-prev-components';
   form: FormGroup = this.formBuilder.group({
     ['name']: ['', Validators.required],
-    ['amount']: ['', [Validators.maxLength(6)]],
+    ['amount']: ['', [Validators.maxLength(8)]],
     ['dpi']: ['', [Validators.required, Validators.maxLength(15)]],
+    ['phone']: ['', [Validators.required, Validators.maxLength(8)]],
   });
 
   constructor(

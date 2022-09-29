@@ -3,9 +3,17 @@
   <app-input
     rule="amount"
     label="Amount"
-    length="6"
+    length="8"
     [form]="form"
     name="amount"
+  ></app-input>
+  <app-input
+    rule="phone"
+    label="Phone"
+    length="8"
+    [form]="form"
+    name="phone"
+    [required]="true"
   ></app-input>
   <app-input
     rule="dpi"

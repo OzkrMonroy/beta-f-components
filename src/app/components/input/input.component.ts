@@ -14,7 +14,6 @@ import { InputValidationsService } from '@/app/utils/inputValidations/input-vali
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
-
   @Input() color: InputColors = 'primary';
   @Input() containerClasses: string = '';
   @Input() label: string = 'Default label';
@@ -26,13 +25,11 @@ export class InputComponent {
   @Input() required: boolean = false;
   @Input() length: string = '50';
   @Input() rule: InputRules = 'inherit';
-  @Input() form!: FormGroup
+  @Input() form!: FormGroup;
 
   @ViewChild('inputRef') inputElement!: ElementRef;
 
-  constructor(
-    private readonly inputValidations: InputValidationsService
-  ) {}
+  constructor(private readonly inputValidations: InputValidationsService) {}
 
   validationValue(event: KeyboardEvent): boolean | KeyboardEvent {
     const { value } = this.inputElement.nativeElement;
@@ -66,6 +63,13 @@ export class InputComponent {
         event
       );
     }
+    if (this.rule === 'phone') {
+      return this.inputValidations.phoneValidation(
+        valueWord,
+        this.length,
+        event
+      );
+    }
 
     return event;
   }
@@ -93,7 +97,6 @@ export class InputComponent {
 
     formInputValue.setValue(numbers.join(' '));
 
-    /* Handle caret position if user edits the number later */
     if (selectionStart < formInputValue.value.length - 1) {
       input.setSelectionRange(selectionStart, selectionStart, 'none');
     }

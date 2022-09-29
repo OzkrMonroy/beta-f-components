@@ -1,45 +1,60 @@
-<div class="relative mt-5 ml-5 mb-8" [ngClass]="containerClasses" [formGroup]="form">
-  <input
-    *ngIf="rule !== 'amount' && rule !== 'dpi'"
-    [ngClass]="getInputColor()"
-    [type]="type"
-    [id]="id"
+<div
+  class="relative mt-5 ml-5 mb-4 flex flex-col"
+  [ngClass]="containerClasses"
+  [formGroup]="form"
+>
+  <div class="relative">
+    <input
+      *ngIf="rule !== 'amount' && rule !== 'dpi'"
+      [ngClass]="getInputColor()"
+      [type]="type"
+      [id]="id"
+      [name]="name"
+      [autocomplete]="autoComplete"
+      [formControlName]="name"
+      [maxlength]="length"
+      (keypress)="validationValue($event)"
+      #inputRef
+    />
+    <input
+      *ngIf="rule === 'amount'"
+      [ngClass]="getInputColor()"
+      [type]="type"
+      [id]="id"
+      [name]="name"
+      [autocomplete]="autoComplete"
+      [formControlName]="name"
+      [maxlength]="length"
+      (keypress)="validationValue($event)"
+      appFormatNumber
+      #inputRef
+    />
+    <input
+      *ngIf="rule === 'dpi'"
+      [ngClass]="getInputColor()"
+      [type]="type"
+      [id]="id"
+      [name]="name"
+      [autocomplete]="autoComplete"
+      [formControlName]="name"
+      [maxlength]="length"
+      (keypress)="validationValue($event)"
+      #inputRef
+    />
+    <label class="placeholder-text" [for]="name" id="placeholder-fname">
+      <div
+        class="text flex gap-1 items-center"
+        [class.float]="mustFloat()"
+        [ngClass]="getInputColor()"
+      >
+        <span>{{ label }}</span
+        ><span class="pt-1" *ngIf="required">*</span>
+      </div>
+    </label>
+  </div>
+  <app-input-alerts
+    [parentForm]="form"
     [name]="name"
-    [autocomplete]="autoComplete"
-    [formControlName]="name"
-    [maxlength]="length"
-    (keypress)="validationValue($event)"
-    #inputRef
-  />
-  <input
-    *ngIf="rule === 'amount'"
-    [ngClass]="getInputColor()"
-    [type]="type"
-    [id]="id"
-    [name]="name"
-    [autocomplete]="autoComplete"
-    [formControlName]="name"
-    [maxlength]="length"
-    (keypress)="validationValue($event)"
-    appFormatNumber
-    #inputRef
-  />
-  <input
-    *ngIf="rule === 'dpi'"
-    [ngClass]="getInputColor()"
-    [type]="type"
-    [id]="id"
-    [name]="name"
-    [autocomplete]="autoComplete"
-    [formControlName]="name"
-    [maxlength]="length"
-    (keypress)="validationValue($event)"
-    #inputRef
-  />
-  <label class="placeholder-text" [for]="name" id="placeholder-fname">
-    <div class="text flex gap-1 items-center" [class.float]="mustFloat()" [ngClass]="getInputColor()">
-      <span>{{ label }}</span><span class="pt-1" *ngIf="required">*</span>
-    </div>
-  </label>
-  <app-input-alerts [parentForm]="form" [name]="name" [rule]="rule"></app-input-alerts>
+    [rule]="rule"
+  ></app-input-alerts>
 </div>

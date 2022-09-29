@@ -35,22 +35,25 @@ export class FormatNumberDirective {
     if (target === null) return;
     const posStart = target.selectionStart || 0;
     const posEnd = target.selectionEnd || 0;
+    target.value = target.value.toString().replace(/\s/g, '').replace(/Q/g,'');
     const oldLength = target.value.toString().split(',').length - 1;
 
     target.value = this.pipeFormatNumber.transform(
       target.value.toString().replace(/\,/gi, '')
     );
-
+    
     this.errorMax.emit({
       valid: this.validInput(target.value),
       value: target.value,
     });
 
-    const newLength = target.value.toString().split(',').length - 1;
+    const newLength = target.value.toString().split(',').length + 1;
     let offset = newLength - oldLength;
 
+    target.value = target.value.toString().trim() !== '' ? `Q ${target.value}` : target.value
+    
     target.selectionStart = +posStart + (posStart + offset < 0 ? 0 : offset);
-    target.selectionEnd = +posEnd + (posEnd + offset < 0 ? 0 : offset);
+    target.selectionEnd = +posEnd + (posEnd + offset < 0 ? 0 : offset) + 1;
   }
 
   validInput(value: string): boolean {

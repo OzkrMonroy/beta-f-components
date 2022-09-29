@@ -34,6 +34,7 @@ export class InputValidationsService {
     length: string,
     event: KeyboardEvent
   ): KeyboardEvent | boolean {
+
     const regex = /^\d+$/g;
     if (valueToValidate.length > parseInt(length)) {
       return false;
@@ -67,9 +68,28 @@ export class InputValidationsService {
     length: string,
     event: KeyboardEvent
   ): KeyboardEvent | boolean {
-    if (valueToValidate.length > parseInt(length)) {
+    const cleanValue = valueToValidate.replace(/Q/g, '')
+    if (cleanValue.length > parseInt(length)) {
       return false;
     }
     return event;
+  }
+
+  phoneValidation(
+    valueToValidate: string,
+    length: string,
+    event: KeyboardEvent
+  ): KeyboardEvent | boolean {
+    if (valueToValidate.length > parseInt(length) && event.key.length <= 1) {
+      return false;
+    }
+    const regex = /^(([234567]\d+)|[234567])$/g;
+    let prb = regex.test(valueToValidate);
+
+    if (prb || event.key.length > 1) {
+      return event;
+    } else {
+      return false;
+    }
   }
 }
