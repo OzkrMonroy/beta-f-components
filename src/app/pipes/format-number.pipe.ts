@@ -7,13 +7,13 @@ export class FormatNumberPipe implements PipeTransform {
   transform(value: string): string {
     let valueReturn: string = '';
     let numberParse: number = 0;
-    numberParse = Number.parseFloat(this.removeComma(`${value.replace(/Q/g, '').trim()}`));
+    numberParse = Number.parseFloat(this.removeComma(`${value}`));
     if (!Number.isNaN(numberParse)) {
       valueReturn = new Intl.NumberFormat('es-GT')
         .format(numberParse)
     }
 
-    return 'Q ' + valueReturn;
+    return valueReturn;
   }
 
   removeComma(value: string): string {
