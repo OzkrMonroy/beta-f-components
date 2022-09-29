@@ -1,0 +1,45 @@
+<div
+  class="text-red-500 text-xs font-lato font-semibold absolute float-left left-4 mt-1"
+  *ngIf="
+    parentForm.get(name)?.errors &&
+    (parentForm.get(name)?.touched || parentForm.get(name)?.dirty)
+  "
+>
+  <span *ngIf="parentForm.get(name)?.hasError('required')">
+    Este campo es requerido
+  </span>
+  <span
+    *ngIf="
+      parentForm.get(name)?.hasError('phoneInvalid') &&
+      !parentForm.get(name)?.hasError('minlength')
+    "
+  >
+    Número de teléfono inválido
+  </span>
+  <span *ngIf="parentForm.get(name)?.hasError('invalidNit')">
+    Nit inválido
+  </span>
+  <span *ngIf="parentForm.get(name)?.hasError('pattern') && rule === 'number'">
+    El campo admite solo datos numéricos.
+  </span>
+  <span
+    *ngIf="
+      (parentForm.get(name)?.hasError('pattern') && rule === 'string') ||
+      (rule === 'address' &&
+        parentForm.get(name)?.hasError('required') === false)
+    "
+  >
+  El campo no admite caracteres especiales.
+  </span>
+  <span *ngIf="parentForm.get(name)?.hasError('email')">
+    Campo inválido
+  </span>
+  <span *ngIf="parentForm.get(name)?.hasError('minlength')">
+    El mínimo de caracteres es: 
+    {{ parentForm.get(name)?.errors?.minlength.requiredLength }}
+  </span>
+  <span *ngIf="parentForm.get(name)?.hasError('maxlength')">
+    El máximo de caracteres es:
+    {{ parentForm.get(name)?.errors?.maxlength.requiredLength }}
+  </span>
+</div>

@@ -1,4 +1,4 @@
-<div class="relative mt-5 ml-5" [ngClass]="containerClasses" [formGroup]="form">
+<div class="relative mt-5 ml-5 mb-8" [ngClass]="containerClasses" [formGroup]="form">
   <input
     *ngIf="rule !== 'amount'"
     [ngClass]="color"
@@ -29,4 +29,5 @@
       <span>{{ lable }}</span><span class="pt-1" *ngIf="required">*</span>
     </div>
   </label>
+  <app-input-alerts [parentForm]="form" [name]="name" [rule]="rule"></app-input-alerts>
 </div>
