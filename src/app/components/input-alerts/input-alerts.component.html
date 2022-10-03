@@ -1,8 +1,9 @@
 <div
   class="text-red-500 text-xs font-lato font-semibold mt-1 ml-4"
   *ngIf="
-    parentForm.get(name)?.errors &&
-    (parentForm.get(name)?.touched || parentForm.get(name)?.dirty)
+    (parentForm.get(name)?.errors && parentForm.get(name)?.touched) ||
+    parentForm.get(name)?.dirty ||
+    isInvalidAmount
   "
 >
   <span *ngIf="parentForm.get(name)?.hasError('required')">
@@ -19,6 +20,7 @@
   <span *ngIf="parentForm.get(name)?.hasError('invalidNit')">
     Nit inválido
   </span>
+  <span *ngIf="isInvalidAmount"> El monto debe ser de 1000 en 1000 </span>
   <span *ngIf="parentForm.get(name)?.hasError('pattern') && rule === 'number'">
     El campo admite solo datos numéricos.
   </span>
@@ -29,13 +31,11 @@
         parentForm.get(name)?.hasError('required') === false)
     "
   >
-  El campo no admite caracteres especiales.
+    El campo no admite caracteres especiales.
   </span>
-  <span *ngIf="parentForm.get(name)?.hasError('email')">
-    Campo inválido
-  </span>
+  <span *ngIf="parentForm.get(name)?.hasError('email')"> Campo inválido </span>
   <span *ngIf="parentForm.get(name)?.hasError('minlength')">
-    El mínimo de caracteres es: 
+    El mínimo de caracteres es:
     {{ parentForm.get(name)?.errors?.minlength.requiredLength }}
   </span>
   <span *ngIf="parentForm.get(name)?.hasError('maxlength')">

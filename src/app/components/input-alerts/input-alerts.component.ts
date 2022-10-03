@@ -11,5 +11,6 @@ export class InputAlertsComponent {
   @Input() parentForm!: FormGroup;
   @Input() rule: InputRules = 'inherit'
   @Input() name: string = ''
+  @Input() isInvalidAmount: boolean = false;
 
 }

@@ -26,6 +26,7 @@ export class InputComponent {
   @Input() length: string = '50';
   @Input() rule: InputRules = 'inherit';
   @Input() form!: FormGroup;
+  @Input() isInvalidAmount: boolean = false;
 
   @ViewChild('inputRef') inputElement!: ElementRef;
 
@@ -107,10 +108,10 @@ export class InputComponent {
   }
 
   getInputColor() {
-    if (
-      this.form.get(this.name)?.errors &&
-      (this.form.get(this.name)?.touched || this.form.get(this.name)?.dirty)
-    ) {
+    if (this.form.get(this.name)?.errors && this.form.get(this.name)?.touched) {
+      return 'error';
+    }
+    if (this.isInvalidAmount) {
       return 'error';
     }
     return this.color;
