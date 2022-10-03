@@ -60,6 +60,10 @@ describe('InputValidationsService', () => {
     const resp = service.dpiValidation('abcdefghplofi', '13')
     expect(resp).toBeFalsy()
   })
+  it("[dpiValidation - error] should return false when the length value is major to the length sent", () => {
+    const resp = service.dpiValidation('20123456790123', '13')
+    expect(resp).toBeFalsy()
+  })
 
   it("[lengthValidation - success] should return the event when the length value is minor or equal to the length sent as a parameter", () => {
     const event = { key: '' } as KeyboardEvent;
@@ -80,6 +84,11 @@ describe('InputValidationsService', () => {
   it("[phoneValidation - error] should return false when the value is not a correct phone number", () => {
     const event = { key: '' } as KeyboardEvent;
     const resp = service.phoneValidation('123456789','8', event)
+    expect(resp).toBe(false);
+  })
+  it("[phoneValidation - error] should return false when the value is not correct", () => {
+    const event = { key: 'v' } as KeyboardEvent;
+    const resp = service.phoneValidation('1234567a','8', event)
     expect(resp).toBe(false);
   })
 });
