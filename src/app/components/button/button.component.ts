@@ -14,14 +14,20 @@ export class ButtonComponent{
   @Input() containerClasses: string = ''
   @Input() buttonColor: ButtonColor = 'secondary'
 
+  buttonColors = {
+    secondary: 'bg-sky-800 text-white hover:bg-sky-500',
+    outlined: 'bg-sky-800 text-white border-[2px] border-white border-solid hover:bg-white hover:text-sky-800 hover:border-sky-800',
+    primary: 'bg-amber-400 text-sky-600 hover:bg-sky-800 hover:text-white'
+  }
+
   getClasses(): string{
     switch (this.buttonColor) {
       case 'secondary':
-        return 'bg-sky-800 text-white hover:bg-sky-500'
+        return this.buttonColors.secondary
       case 'outlined':
-        return 'bg-sky-800 text-white border-[2px] border-white border-solid hover:bg-white hover:text-sky-800 hover:border-sky-800'
+        return this.buttonColors.outlined
       default:
-        return 'bg-amber-400 text-sky-600 hover:bg-sky-800 hover:text-white'
+        return this.buttonColors.primary
     }
   }
 }
