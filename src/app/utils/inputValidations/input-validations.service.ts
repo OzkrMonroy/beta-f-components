@@ -20,9 +20,8 @@ export class InputValidationsService {
     valueToValidate: string,
     event: KeyboardEvent
   ): KeyboardEvent | boolean {
-    const regex = /^(([a-záéíóúÑäëïöü\,\.\-'0-9])|( ))+$/gi;
-    const regex2 = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/gi;
-    if (!regex.test(valueToValidate) && regex2.test(valueToValidate)) {
+    const regex = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/gi;
+    if (!regex.test(valueToValidate)) {
       return false;
     } else {
       return event;
